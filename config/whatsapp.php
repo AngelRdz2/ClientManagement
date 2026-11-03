@@ -5,6 +5,13 @@
 | (o, en su defecto, de la configuración cifrada en base de datos). Nunca se escriben en código.
 */
 return [
+    /*
+    | URL pública HTTPS por la que los proveedores alcanzan esta aplicación (dominio de producción o túnel en
+    | desarrollo, ej. https://abc123.sharedwithexpose.com). Se usa para construir las URL de webhooks, los
+    | StatusCallback de Twilio y validar firmas. Si está vacía se usa APP_URL (no accesible desde Internet en local).
+    */
+    'public_url' => env('WHATSAPP_PUBLIC_URL'),
+
     'meta' => [
         'graph_url' => env('WHATSAPP_META_GRAPH_URL', 'https://graph.facebook.com'),
         'api_version' => env('WHATSAPP_META_API_VERSION', 'v23.0'),

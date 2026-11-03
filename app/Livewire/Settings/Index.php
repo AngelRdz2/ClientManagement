@@ -6,6 +6,7 @@ use App\Services\ActivityLogger;
 use App\Services\Settings;
 use App\Services\WhatsApp\WhatsAppManager;
 use App\Support\Phone;
+use App\Support\Webhooks;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Url;
 use Livewire\Component;
@@ -141,7 +142,8 @@ class Index extends Component
             'providers' => $whatsapp->all(),
             'secretStatus' => $secretStatus,
             'envKeys' => collect(Settings::ENV_OVERRIDES)->filter(fn ($env, $key) => $settings->isFromEnv($key))->keys()->all(),
-            'webhooks' => ['meta' => route('webhooks.whatsapp', 'meta'), 'twilio' => route('webhooks.whatsapp', 'twilio')],
+            'webhooks' => ['meta' => Webhooks::url('meta'), 'twilio' => Webhooks::url('twilio')],
+            'webhooksPublic' => Webhooks::isPublic(),
         ]);
     }
 }

@@ -6,6 +6,7 @@ use App\Enums\ConversationStatus;
 use App\Enums\MessageStatus;
 use App\Enums\SenderType;
 use App\Livewire\Customers\Show;
+use App\Livewire\Templates\Index;
 use App\Models\Conversation;
 use App\Models\Customer;
 use App\Models\Message;
@@ -127,7 +128,7 @@ class DirectMessageTest extends TestCase
         $template = MessageTemplate::where('name', 'Cobranza · Atención urgente')->firstOrFail();
 
         // SID inválido y luego válido (con espacios pegados desde la consola)
-        Livewire::actingAs($this->admin())->test(\App\Livewire\Templates\Index::class)
+        Livewire::actingAs($this->admin())->test(Index::class)
             ->call('edit', $template->id)
             ->set('form.twilio_content_sid', 'abc123')
             ->call('save')

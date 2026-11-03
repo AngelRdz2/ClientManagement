@@ -9,6 +9,7 @@ use App\Services\WhatsApp\Data\SendResult;
 use App\Services\WhatsApp\Data\StatusUpdate;
 use App\Services\WhatsApp\Data\WebhookPayload;
 use App\Support\Phone;
+use App\Support\Webhooks;
 use Carbon\CarbonImmutable;
 use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Http\Request;
@@ -84,14 +85,28 @@ class TwilioProvider implements WhatsAppProvider
 
         $params = $request->post();
         ksort($params);
-        $data = $request->fullUrl();
+        $payload = '';
         foreach ($params as $key => $value) {
-            $data .= $key.(is_array($value) ? implode('', $value) : $value);
+            $payload .= $key.(is_array($value) ? implode('', $value) : $value);
         }
 
-        $expected = base64_encode(hash_hmac('sha1', $data, $token, true));
+        // Twilio firma la URL PÚBLICA a la que envió el webhook. Detrás de un túnel o proxy, Laravel ve otra URL
+        // (ej. http://client-management.test), por eso se prueba también con la URL pública configurada.
+        $query = $request->getQueryString();
+        $candidates = array_unique([
+            $request->fullUrl(),
+            Webhooks::url('twilio').($query ? '?'.$query : ''),
+        ]);
 
-        return hash_equals($expected, $signature);
+        foreach ($candidates as $url) {
+            if (hash_equals(base64_encode(hash_hmac('sha1', $url.$payload, $token, true)), $signature)) {
+                return true;
+            }
+        }
+
+        Log::warning('Twilio: firma de webhook no coincide con ninguna URL esperada', ['urls' => array_values($candidates)]);
+
+        return false;
     }
 
     public function parseWebhook(Request $request): WebhookPayload
@@ -148,8 +163,11 @@ class TwilioProvider implements WhatsAppProvider
         $params += [
             'From' => 'whatsapp:+'.Phone::normalize($this->from()),
             'To' => 'whatsapp:+'.Phone::normalize($to),
-            'StatusCallback' => route('webhooks.whatsapp', 'twilio'),
         ];
+        // Estados de entrega/lectura: solo si Twilio puede alcanzar la URL (HTTPS pública).
+        if (Webhooks::isPublic($callback = Webhooks::url('twilio'))) {
+            $params['StatusCallback'] = $callback;
+        }
 
         try {
             $response = Http::asForm()->withBasicAuth($this->sid(), $this->token())->timeout(20)->post($url, $params);

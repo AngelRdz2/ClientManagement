@@ -74,10 +74,26 @@
                         @include('livewire.settings.partials.secret', ['key' => 'whatsapp.twilio_auth_token', 'label' => 'Auth token'])
                     </div>
                     <div class="mt-4 rounded-xl bg-slate-50 p-3 text-xs text-slate-600">
-                        <p class="font-semibold text-slate-700">URL del webhook (“When a message comes in”)</p>
+                        <p class="font-semibold text-slate-700">URL del webhook (“When a message comes in”, método POST)</p>
                         <code class="mt-1 block break-all text-indigo-700">{{ $webhooks['twilio'] }}</code>
+                        <p class="mt-1">En el Sandbox: Twilio Console › Messaging › Try it out › Send a WhatsApp message › <em>Sandbox settings</em>.</p>
                     </div>
                 </x-card>
+
+                @if ($values['whatsapp__provider'] !== 'simulator' && ! $webhooksPublic)
+                    <div class="flex items-start gap-3 rounded-2xl border border-amber-300 bg-amber-50 p-4 text-sm text-amber-900">
+                        <x-icon name="triangle-alert" class="mt-0.5 size-5 shrink-0" />
+                        <div>
+                            <p class="font-semibold">Los mensajes de los clientes no pueden llegar a esta instalación</p>
+                            <p class="mt-1 text-xs">La URL de los webhooks no es pública (HTTPS accesible desde Internet). Mientras tanto se pueden <strong>enviar</strong> mensajes, pero las <strong>respuestas</strong> de los clientes y los estados de entrega/lectura no llegan.</p>
+                            <ol class="mt-2 list-decimal space-y-1 pl-5 text-xs">
+                                <li>Abre un túnel HTTPS hacia el sitio local, por ejemplo <code>herd share</code> en la carpeta del proyecto (o ngrok / cloudflared).</li>
+                                <li>Agrega al <code>.env</code>: <code>WHATSAPP_PUBLIC_URL=https://tu-url-del-tunel</code> y ejecuta <code>php artisan config:clear</code>.</li>
+                                <li>Copia la URL del webhook que aparecerá arriba y pégala en el proveedor (Twilio: “When a message comes in”).</li>
+                            </ol>
+                        </div>
+                    </div>
+                @endif
 
                 <x-card title="Probar conexión" icon="send">
                     <div class="flex flex-col gap-2 sm:flex-row sm:items-end">
