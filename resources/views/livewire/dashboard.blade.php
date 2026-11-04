@@ -37,21 +37,21 @@
 
     {{-- KPIs de mensajería --}}
     <div class="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-3">
-        <div class="flex items-center gap-4 rounded-2xl border border-slate-200/80 bg-white p-4 shadow-card">
+        <div class="flex items-center gap-4 rounded-2xl border border-slate-200/80 bg-surface p-4 shadow-card">
             <span class="grid size-11 place-items-center rounded-xl bg-indigo-50 text-indigo-600"><x-icon name="send" class="size-5" /></span>
             <div>
                 <p class="text-xs font-medium text-slate-500">Mensajes enviados este mes</p>
                 <p class="text-xl font-bold text-slate-900 tabular-nums">{{ number_format($kpis['messages_sent_month']) }}</p>
             </div>
         </div>
-        <div class="flex items-center gap-4 rounded-2xl border border-slate-200/80 bg-white p-4 shadow-card">
+        <div class="flex items-center gap-4 rounded-2xl border border-slate-200/80 bg-surface p-4 shadow-card">
             <span class="grid size-11 place-items-center rounded-xl bg-slate-100 text-slate-600"><x-icon name="clock" class="size-5" /></span>
             <div>
                 <p class="text-xs font-medium text-slate-500">Mensajes pendientes</p>
                 <p class="text-xl font-bold text-slate-900 tabular-nums">{{ number_format($kpis['messages_pending']) }}</p>
             </div>
         </div>
-        <div class="flex items-center gap-4 rounded-2xl border border-slate-200/80 bg-white p-4 shadow-card">
+        <div class="flex items-center gap-4 rounded-2xl border border-slate-200/80 bg-surface p-4 shadow-card">
             <span class="grid size-11 place-items-center rounded-xl bg-rose-50 text-rose-600"><x-icon name="circle-x" class="size-5" /></span>
             <div>
                 <p class="text-xs font-medium text-slate-500">Mensajes fallidos este mes</p>

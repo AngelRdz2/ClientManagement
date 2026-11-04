@@ -3,6 +3,7 @@ import { Livewire, Alpine } from '../../vendor/livewire/livewire/dist/livewire.e
 import Swal from 'sweetalert2'
 import 'sweetalert2/dist/sweetalert2.min.css'
 import { registerCharts } from './charts'
+import { registerTheme } from './theme'
 
 window.Swal = Swal
 
@@ -56,6 +57,7 @@ document.addEventListener('livewire:init', () => {
     })
 })
 
+registerTheme(Alpine)
 registerCharts(Alpine)
 
 Livewire.start()

@@ -20,7 +20,7 @@
                     <div class="relative">
                         <x-input icon="search" type="search" wire:model.live.debounce.300ms="customerSearch" placeholder="Buscar cliente para usar su número…" />
                         @if ($candidates->isNotEmpty())
-                            <ul class="absolute z-10 mt-1 w-full divide-y divide-slate-100 rounded-xl border border-slate-200 bg-white shadow-elevated">
+                            <ul class="absolute z-10 mt-1 w-full divide-y divide-slate-100 rounded-xl border border-slate-200 bg-surface shadow-elevated">
                                 @foreach ($candidates as $c)
                                     <li><button wire:click="useCustomer({{ $c->id }})" class="w-full px-3 py-2 text-left text-sm hover:bg-indigo-50">{{ $c->full_name }} <span class="block text-xs text-slate-400">{{ $c->code }} · {{ $c->phone_primary }}</span></button></li>
                                 @endforeach
@@ -54,7 +54,7 @@
 
         {{-- Teléfono simulado --}}
         <div class="mx-auto w-full max-w-[420px]">
-            <div class="overflow-hidden rounded-[2.2rem] border-[10px] border-slate-900 bg-slate-900 shadow-2xl">
+            <div class="overflow-hidden rounded-[2.2rem] border-[10px] border-slate-900 bg-slate-900 shadow-2xl dark:border-black dark:bg-black dark:ring-1 dark:ring-white/10">
                 <div class="flex items-center gap-3 bg-[#075e54] px-4 py-3 text-white">
                     <span class="grid size-9 place-items-center rounded-full bg-white/20 text-sm font-bold">{{ mb_substr(setting('company.name'), 0, 1) }}</span>
                     <div class="min-w-0 flex-1">
@@ -73,7 +73,7 @@
                     @endif
                     @forelse ($entries as $entry)
                         @if ($entry->isEvent())
-                            <div class="flex justify-center"><span class="max-w-[90%] rounded-lg bg-white/90 px-2.5 py-1 text-center text-[10.5px] text-slate-500 shadow-sm">{{ $entry->body }}</span></div>
+                            <div class="flex justify-center"><span class="max-w-[90%] rounded-lg bg-surface/90 px-2.5 py-1 text-center text-[10.5px] text-slate-500 shadow-sm">{{ $entry->body }}</span></div>
                         @else
                             {{-- Desde la perspectiva del cliente: sus mensajes van a la derecha --}}
                             @php $fromCustomer = $entry->sender_type === \App\Enums\SenderType::Customer; @endphp
@@ -91,8 +91,8 @@
                         </div>
                     @endforelse
                 </div>
-                <form wire:submit="send" class="flex items-center gap-2 bg-[#f0f2f5] p-2.5">
-                    <input type="text" wire:model="text" placeholder="Escribe un mensaje" autocomplete="off" class="flex-1 rounded-full border-0 bg-white px-4 py-2.5 text-sm focus:ring-2 focus:ring-emerald-500/30 focus:outline-none">
+                <form wire:submit="send" class="flex items-center gap-2 bg-[#f0f2f5] p-2.5 dark:bg-[#1f2c34]">
+                    <input type="text" wire:model="text" placeholder="Escribe un mensaje" autocomplete="off" class="flex-1 rounded-full border-0 bg-surface px-4 py-2.5 text-sm focus:ring-2 focus:ring-emerald-500/30 focus:outline-none">
                     <button type="submit" class="grid size-10 place-items-center rounded-full bg-[#00a884] text-white hover:bg-[#029273]" wire:loading.attr="disabled" wire:target="send,quick">
                         <x-icon name="send" class="size-4" wire:loading.remove wire:target="send,quick" />
                         <x-icon name="loader-circle" class="size-4 animate-spin" wire:loading wire:target="send,quick" />

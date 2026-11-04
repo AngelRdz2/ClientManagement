@@ -4,7 +4,7 @@
         <x-icon name="chevron-left" class="size-3.5" /> Clientes
     </a>
 
-    <div class="mb-6 overflow-hidden rounded-2xl border border-slate-200/80 bg-white shadow-card">
+    <div class="mb-6 overflow-hidden rounded-2xl border border-slate-200/80 bg-surface shadow-card">
         <div class="h-1.5" style="background: linear-gradient(90deg, {{ $customer->delinquencyStatus?->color ?? '#94a3b8' }}, #6366f1);"></div>
         <div class="flex flex-col gap-5 p-5 lg:flex-row lg:items-center lg:justify-between">
             <div class="flex items-start gap-4">
@@ -73,7 +73,7 @@
                     'messages' => ['Mensajes', 'send', $counts['messages']],
                     'conversations' => ['Conversaciones', 'messages-square', $counts['conversations']],
                 ] as $key => [$label, $icon, $count])
-                    <button wire:click="setTab('{{ $key }}')" @class(['flex shrink-0 items-center gap-2 rounded-lg px-3.5 py-2 text-sm font-medium transition', 'bg-white text-slate-900 shadow-sm' => $tab === $key, 'text-slate-500 hover:text-slate-800' => $tab !== $key])>
+                    <button wire:click="setTab('{{ $key }}')" @class(['flex shrink-0 items-center gap-2 rounded-lg px-3.5 py-2 text-sm font-medium transition', 'bg-surface text-slate-900 shadow-sm' => $tab === $key, 'text-slate-500 hover:text-slate-800' => $tab !== $key])>
                         <x-icon :name="$icon" class="size-4" /> {{ $label }}
                         <span class="rounded-full bg-slate-100 px-1.5 text-[11px] text-slate-500">{{ $count }}</span>
                     </button>
@@ -87,7 +87,7 @@
                             <div class="flex justify-end"><x-button size="sm" icon="plus" wire:click="createArticle">Agregar artículo</x-button></div>
                         @endcan
                         @forelse ($articles as $a)
-                            <div wire:key="art-{{ $a->id }}" class="rounded-2xl border border-slate-200/80 bg-white p-5 shadow-card">
+                            <div wire:key="art-{{ $a->id }}" class="rounded-2xl border border-slate-200/80 bg-surface p-5 shadow-card">
                                 <div class="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
                                     <div class="flex items-start gap-3">
                                         <span class="grid size-11 shrink-0 place-items-center rounded-xl bg-indigo-50 text-indigo-600"><x-icon name="package" class="size-5" /></span>
@@ -140,7 +140,7 @@
                                 </div>
                             </div>
                         @empty
-                            <div class="rounded-2xl border border-dashed border-slate-300 bg-white">
+                            <div class="rounded-2xl border border-dashed border-slate-300 bg-surface">
                                 <x-empty-state icon="package" title="Sin artículos registrados" description="Agrega los artículos o productos adquiridos por el cliente." />
                             </div>
                         @endforelse

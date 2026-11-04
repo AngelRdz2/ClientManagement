@@ -5,7 +5,7 @@
 
     <div class="mb-5 inline-flex rounded-xl bg-slate-200/50 p-1">
         @foreach (['users' => ['Usuarios', 'users'], 'roles' => ['Roles y permisos', 'shield-check']] as $key => [$label, $icon])
-            <button wire:click="$set('tab', '{{ $key }}')" @class(['flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium', 'bg-white text-slate-900 shadow-sm' => $tab === $key, 'text-slate-500' => $tab !== $key])>
+            <button wire:click="$set('tab', '{{ $key }}')" @class(['flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium', 'bg-surface text-slate-900 shadow-sm' => $tab === $key, 'text-slate-500' => $tab !== $key])>
                 <x-icon :name="$icon" class="size-4" /> {{ $label }}
             </button>
         @endforeach

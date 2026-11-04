@@ -11,7 +11,7 @@
         <x-slot:toolbar>
             <div class="inline-flex rounded-lg bg-slate-100 p-1 text-sm">
                 @foreach (['all' => 'Todas', 'unread' => "No leídas ($unread)"] as $key => $label)
-                    <button wire:click="$set('filter', '{{ $key }}')" @class(['rounded-md px-3 py-1.5 font-medium transition', 'bg-white text-slate-900 shadow-sm' => $filter === $key, 'text-slate-500 hover:text-slate-700' => $filter !== $key])>{{ $label }}</button>
+                    <button wire:click="$set('filter', '{{ $key }}')" @class(['rounded-md px-3 py-1.5 font-medium transition', 'bg-surface text-slate-900 shadow-sm' => $filter === $key, 'text-slate-500 hover:text-slate-700' => $filter !== $key])>{{ $label }}</button>
                 @endforeach
             </div>
         </x-slot:toolbar>

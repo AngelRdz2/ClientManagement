@@ -11,7 +11,7 @@
     @endphp
     <ol class="mb-6 grid grid-cols-3 gap-2 text-xs font-medium sm:text-sm">
         @foreach ([1 => 'Subir archivo', 2 => 'Validar y previsualizar', 3 => 'Resultado'] as $n => $label)
-            <li @class(['flex items-center gap-2 rounded-xl border px-3 py-2.5', 'border-indigo-200 bg-indigo-50 text-indigo-700' => $step === $n, 'border-emerald-200 bg-emerald-50 text-emerald-700' => $step > $n, 'border-slate-200 bg-white text-slate-400' => $step < $n])>
+            <li @class(['flex items-center gap-2 rounded-xl border px-3 py-2.5', 'border-indigo-200 bg-indigo-50 text-indigo-700' => $step === $n, 'border-emerald-200 bg-emerald-50 text-emerald-700' => $step > $n, 'border-slate-200 bg-surface text-slate-400' => $step < $n])>
                 <span @class(['grid size-6 shrink-0 place-items-center rounded-full text-[11px] font-bold', 'bg-indigo-600 text-white' => $step === $n, 'bg-emerald-500 text-white' => $step > $n, 'bg-slate-200 text-slate-500' => $step < $n])>
                     @if ($step > $n) <x-icon name="check" class="size-3.5" /> @else {{ $n }} @endif
                 </span>
@@ -24,7 +24,7 @@
         <div class="grid grid-cols-1 gap-6 xl:grid-cols-3">
             <div class="xl:col-span-2">
                 <label x-data="{ dragging: false }" x-on:dragover.prevent="dragging = true" x-on:dragleave.prevent="dragging = false" x-on:drop="dragging = false"
-                       :class="dragging ? 'border-indigo-500 bg-indigo-50/60' : 'border-slate-300 bg-white hover:border-indigo-400 hover:bg-slate-50'"
+                       :class="dragging ? 'border-indigo-500 bg-indigo-50/60' : 'border-slate-300 bg-surface hover:border-indigo-400 hover:bg-slate-50'"
                        class="relative flex cursor-pointer flex-col items-center justify-center rounded-2xl border-2 border-dashed px-6 py-16 text-center transition">
                     <input type="file" wire:model="file" accept=".xlsx,.xls,.csv" class="absolute inset-0 cursor-pointer opacity-0">
                     <span class="grid size-16 place-items-center rounded-2xl bg-indigo-50 text-indigo-600">
@@ -71,7 +71,7 @@
                 <x-stat-card label="Clientes a actualizar" :value="number_format($analysis['existing_customers'] ?? 0)" icon="refresh-cw" color="blue" hint="Coinciden por código y DUI" />
             </div>
 
-            <div class="mb-6 flex flex-col gap-3 rounded-2xl border border-slate-200 bg-white p-4 shadow-card sm:flex-row sm:items-center sm:justify-between">
+            <div class="mb-6 flex flex-col gap-3 rounded-2xl border border-slate-200 bg-surface p-4 shadow-card sm:flex-row sm:items-center sm:justify-between">
                 <div class="flex items-center gap-3 text-sm">
                     <x-icon name="file-spreadsheet" class="size-5 text-emerald-600" />
                     <span class="font-medium text-slate-800">{{ $batch->original_filename }}</span>
@@ -127,7 +127,7 @@
     @endif
 
     @if ($step === 3 && $batch)
-        <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-card">
+        <div class="rounded-2xl border border-slate-200 bg-surface p-6 shadow-card">
             @if ($polling)
                 @php $pct = $batch->valid_rows ? min(100, round($batch->processed_rows / $batch->valid_rows * 100)) : 0; @endphp
                 <div class="flex items-center gap-3">

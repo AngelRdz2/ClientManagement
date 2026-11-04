@@ -1,6 +1,6 @@
 @props(['footer' => null])
 
-<div {{ $attributes->class(['overflow-hidden rounded-2xl border border-slate-200/80 bg-white shadow-card']) }}>
+<div {{ $attributes->class(['overflow-hidden rounded-2xl border border-slate-200/80 bg-surface shadow-card']) }}>
     @isset($toolbar)
         <div class="flex flex-col gap-3 border-b border-slate-100 p-4 lg:flex-row lg:items-center lg:justify-between">
             {{ $toolbar }}

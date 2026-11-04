@@ -5,7 +5,7 @@
 
     <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
         @forelse ($groups as $group)
-            <div wire:key="g-{{ $group->id }}" class="rounded-2xl border border-slate-200/80 bg-white p-5 shadow-card">
+            <div wire:key="g-{{ $group->id }}" class="rounded-2xl border border-slate-200/80 bg-surface p-5 shadow-card">
                 <div class="flex items-start justify-between gap-3">
                     <div class="flex items-center gap-3">
                         <span class="grid size-10 place-items-center rounded-xl text-white" style="background-color: {{ $group->color }}"><x-icon name="layers" class="size-5" /></span>
@@ -20,7 +20,7 @@
                 <x-button variant="soft" size="sm" icon="users" class="mt-3 w-full" wire:click="manageMembers({{ $group->id }})">Administrar miembros</x-button>
             </div>
         @empty
-            <div class="col-span-full rounded-2xl border border-dashed border-slate-300 bg-white"><x-empty-state icon="layers" title="Sin grupos" description="Crea grupos para segmentar tus campañas." /></div>
+            <div class="col-span-full rounded-2xl border border-dashed border-slate-300 bg-surface"><x-empty-state icon="layers" title="Sin grupos" description="Crea grupos para segmentar tus campañas." /></div>
         @endforelse
     </div>
 

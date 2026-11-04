@@ -16,7 +16,7 @@
 
 <{{ $tag }} @if ($href) href="{{ $href }}" wire:navigate @endif
     {{ $attributes->class([
-        'group relative flex flex-col justify-between overflow-hidden rounded-2xl border bg-white p-5 shadow-card transition',
+        'group relative flex flex-col justify-between overflow-hidden rounded-2xl border bg-surface p-5 shadow-card transition',
         'border-rose-200 ring-4 ring-rose-500/10' => $alert,
         'border-slate-200/80' => ! $alert,
         'hover:-translate-y-0.5 hover:shadow-elevated' => $href,

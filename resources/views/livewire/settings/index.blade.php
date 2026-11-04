@@ -2,7 +2,7 @@
     <x-page-header title="Configuración" description="Parámetros generales del sistema, integración con WhatsApp y reglas de comunicación." />
 
     <div class="grid grid-cols-1 gap-6 xl:grid-cols-[260px_1fr]">
-        <nav class="space-y-1 rounded-2xl border border-slate-200/80 bg-white p-2 shadow-card xl:self-start">
+        <nav class="space-y-1 rounded-2xl border border-slate-200/80 bg-surface p-2 shadow-card xl:self-start">
             @foreach ($tabs as $key => [$label, $icon])
                 <button wire:click="$set('tab', '{{ $key }}')" @class(['flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm font-medium', 'bg-indigo-50 text-indigo-700' => $tab === $key, 'text-slate-600 hover:bg-slate-50' => $tab !== $key])>
                     <x-icon :name="$icon" class="size-4" /> {{ $label }}

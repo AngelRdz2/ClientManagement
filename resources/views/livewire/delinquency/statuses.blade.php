@@ -74,7 +74,7 @@
             <x-field label="Prioridad" error="form.priority" required class="sm:col-span-2" hint="Orden de visualización"><x-input type="number" min="0" wire:model="form.priority" /></x-field>
             <x-field label="Color" error="form.color" required class="sm:col-span-2">
                 <div class="flex items-center gap-2">
-                    <input type="color" wire:model.live="form.color" class="h-9 w-12 cursor-pointer rounded-lg border border-slate-300 bg-white p-1">
+                    <input type="color" wire:model.live="form.color" class="h-9 w-12 cursor-pointer rounded-lg border border-slate-300 bg-surface p-1">
                     <x-input wire:model.live="form.color" class="font-mono" />
                 </div>
             </x-field>

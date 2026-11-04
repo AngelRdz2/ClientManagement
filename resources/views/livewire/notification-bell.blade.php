@@ -2,14 +2,14 @@
     <button x-on:click="open = ! open" class="relative rounded-xl p-2 text-slate-500 transition hover:bg-slate-100 hover:text-slate-700" title="Notificaciones">
         <x-icon name="bell" class="size-5" />
         @if ($unreadCount > 0)
-            <span class="absolute top-1 right-1 grid min-w-[17px] place-items-center rounded-full bg-rose-500 px-1 text-[10px] leading-[17px] font-bold text-white ring-2 ring-white">
+            <span class="absolute top-1 right-1 grid min-w-[17px] place-items-center rounded-full bg-rose-500 px-1 text-[10px] leading-[17px] font-bold text-white ring-2 ring-surface">
                 {{ $unreadCount > 99 ? '99+' : $unreadCount }}
             </span>
         @endif
     </button>
 
     <div x-show="open" x-cloak x-transition
-         class="absolute right-0 z-40 mt-2 w-[22rem] max-w-[calc(100vw-2rem)] overflow-hidden rounded-xl border border-slate-200 bg-white shadow-elevated">
+         class="absolute right-0 z-40 mt-2 w-[22rem] max-w-[calc(100vw-2rem)] overflow-hidden rounded-xl border border-slate-200 bg-surface shadow-elevated">
         <div class="flex items-center justify-between border-b border-slate-100 px-4 py-3">
             <p class="text-sm font-semibold text-slate-900">Notificaciones</p>
             @if ($unreadCount > 0)

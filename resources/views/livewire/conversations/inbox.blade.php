@@ -1,5 +1,5 @@
 <div wire:poll.5s class="-mx-4 -my-6 sm:-mx-6 lg:-mx-8">
-    <div class="grid h-[calc(100vh-4rem)] grid-cols-1 overflow-hidden bg-white lg:grid-cols-[340px_1fr] 2xl:grid-cols-[340px_1fr_320px]">
+    <div class="grid h-[calc(100vh-4rem)] grid-cols-1 overflow-hidden bg-surface lg:grid-cols-[340px_1fr] 2xl:grid-cols-[340px_1fr_320px]">
 
         {{-- ===== Columna 1: lista de conversaciones ===== --}}
         <aside @class(['flex min-h-0 flex-col border-r border-slate-200', 'hidden lg:flex' => $selected])>
@@ -19,7 +19,7 @@
                             'bg-slate-100 text-slate-600 hover:bg-slate-200' => $filter !== $key,
                         ])>
                             {{ $label }}
-                            <span @class(['rounded-full px-1.5 text-[10px]', 'bg-white/20' => $filter === $key, 'bg-rose-500 text-white' => $filter !== $key && $key === 'pending' && $counts->pending > 0, 'bg-white text-slate-500' => $filter !== $key && ! ($key === 'pending' && $counts->pending > 0)])>{{ (int) $counts->{$key} }}</span>
+                            <span @class(['rounded-full px-1.5 text-[10px]', 'bg-white/20' => $filter === $key, 'bg-rose-500 text-white' => $filter !== $key && $key === 'pending' && $counts->pending > 0, 'bg-surface text-slate-500' => $filter !== $key && ! ($key === 'pending' && $counts->pending > 0)])>{{ (int) $counts->{$key} }}</span>
                         </button>
                     @endforeach
                 </div>
@@ -36,7 +36,7 @@
                             <span @class(['relative grid size-10 shrink-0 place-items-center rounded-full text-sm font-bold', 'bg-gradient-to-br from-indigo-100 to-indigo-200 text-indigo-700' => $c->customer_id, 'bg-slate-200 text-slate-500' => ! $c->customer_id])>
                                 {{ mb_substr($c->displayName(), 0, 1) === '+' ? '#' : mb_strtoupper(mb_substr($c->displayName(), 0, 1)) }}
                                 @if ($c->status === \App\Enums\ConversationStatus::PendingAgent)
-                                    <span class="absolute -top-0.5 -right-0.5 size-3 rounded-full bg-rose-500 ring-2 ring-white"></span>
+                                    <span class="absolute -top-0.5 -right-0.5 size-3 rounded-full bg-rose-500 ring-2 ring-surface"></span>
                                 @endif
                             </span>
                             <span class="min-w-0 flex-1">
@@ -69,7 +69,7 @@
         {{-- ===== Columna 2: conversación ===== --}}
         <section @class(['flex min-h-0 flex-col', 'hidden lg:flex' => ! $selected])>
             @if ($selected)
-                <header class="flex flex-wrap items-center gap-3 border-b border-slate-200 bg-white px-4 py-3">
+                <header class="flex flex-wrap items-center gap-3 border-b border-slate-200 bg-surface px-4 py-3">
                     <button wire:click="$set('selectedId', null)" class="rounded-lg p-1 text-slate-500 hover:bg-slate-100 lg:hidden"><x-icon name="chevron-left" class="size-5" /></button>
                     <span class="grid size-10 place-items-center rounded-full bg-gradient-to-br from-indigo-500 to-navy-700 text-sm font-bold text-white">{{ mb_strtoupper(mb_substr($selected->displayName(), 0, 1)) }}</span>
                     <div class="min-w-0 flex-1">
@@ -109,7 +109,7 @@
                     @foreach ($entries as $entry)
                         @php $prev = $entries[$loop->index - 1] ?? null; @endphp
                         @if (! $prev || ! $prev->created_at->isSameDay($entry->created_at))
-                            <div class="my-3 flex justify-center"><span class="rounded-lg bg-white/90 px-3 py-1 text-[11px] font-medium text-slate-500 shadow-sm">{{ $entry->created_at->isToday() ? 'Hoy' : $entry->created_at->translatedFormat('d \d\e F Y') }}</span></div>
+                            <div class="my-3 flex justify-center"><span class="rounded-lg bg-surface/90 px-3 py-1 text-[11px] font-medium text-slate-500 shadow-sm">{{ $entry->created_at->isToday() ? 'Hoy' : $entry->created_at->translatedFormat('d \d\e F Y') }}</span></div>
                         @endif
                         @if ($entry->isEvent())
                             <div class="flex justify-center"><span class="max-w-md rounded-lg bg-amber-50 px-3 py-1.5 text-center text-[11.5px] text-amber-900 shadow-sm ring-1 ring-amber-200">{{ $entry->body }} · {{ $entry->created_at->format('h:i a') }}</span></div>
@@ -133,7 +133,7 @@
                     @endforeach
                 </div>
 
-                <footer class="border-t border-slate-200 bg-white p-3">
+                <footer class="border-t border-slate-200 bg-surface p-3">
                     @if ($selected->status === \App\Enums\ConversationStatus::Bot)
                         <p class="mb-2 flex items-center gap-1.5 text-xs text-violet-700"><x-icon name="bot" class="size-3.5" /> El bot está atendiendo. Si respondes, tomarás la conversación y el bot dejará de responder.</p>
                     @elseif ($selected->status === \App\Enums\ConversationStatus::PendingAgent)
@@ -155,7 +155,7 @@
                 </footer>
             @else
                 <div class="chat-pattern flex flex-1 flex-col items-center justify-center p-8 text-center">
-                    <span class="grid size-20 place-items-center rounded-3xl bg-white text-indigo-500 shadow-card"><x-icon name="messages-square" class="size-10" /></span>
+                    <span class="grid size-20 place-items-center rounded-3xl bg-surface text-indigo-500 shadow-card"><x-icon name="messages-square" class="size-10" /></span>
                     <h2 class="mt-5 text-lg font-semibold text-slate-900">Selecciona una conversación</h2>
                     <p class="mt-1 max-w-sm text-sm text-slate-500">Atiende a los clientes que solicitaron un asesor, responde mensajes y devuelve conversaciones al bot cuando termines.</p>
                 </div>
@@ -175,13 +175,13 @@
                             <div class="mt-2 flex justify-center"><x-status-pill :status="$cust->delinquencyStatus" /></div>
                         </div>
                         <div class="mt-5 grid grid-cols-2 gap-2 text-center">
-                            <div class="rounded-xl bg-white p-3 shadow-card"><p class="text-[11px] text-slate-500">Saldo</p><p class="font-bold text-slate-900">{{ money($cust->outstanding_balance) }}</p></div>
-                            <div class="rounded-xl bg-white p-3 shadow-card"><p class="text-[11px] text-slate-500">Días de mora</p><p class="font-bold text-slate-900">{{ $cust->days_overdue }}</p></div>
+                            <div class="rounded-xl bg-surface p-3 shadow-card"><p class="text-[11px] text-slate-500">Saldo</p><p class="font-bold text-slate-900">{{ money($cust->outstanding_balance) }}</p></div>
+                            <div class="rounded-xl bg-surface p-3 shadow-card"><p class="text-[11px] text-slate-500">Días de mora</p><p class="font-bold text-slate-900">{{ $cust->days_overdue }}</p></div>
                         </div>
                         <p class="mt-5 mb-2 text-[11px] font-semibold tracking-wide text-slate-500 uppercase">Artículos</p>
                         <ul class="space-y-2">
                             @foreach ($cust->articles->where('balance', '>', 0) as $a)
-                                <li class="rounded-xl bg-white p-3 text-xs shadow-card">
+                                <li class="rounded-xl bg-surface p-3 text-xs shadow-card">
                                     <p class="font-medium text-slate-800">{{ $a->description }}</p>
                                     <p class="mt-1 flex justify-between text-slate-500"><span>Saldo {{ money($a->balance) }}</span><span>{{ $a->installments_pending }} cuotas</span></p>
                                 </li>
@@ -191,7 +191,7 @@
                             <x-button variant="secondary" size="sm" icon="user-round" class="mt-4 w-full" :href="route('customers.show', $cust)">Ver ficha completa</x-button>
                         @endcan
                     @else
-                        <div class="rounded-xl border border-dashed border-slate-300 bg-white p-4 text-center">
+                        <div class="rounded-xl border border-dashed border-slate-300 bg-surface p-4 text-center">
                             <x-icon name="user-x" class="mx-auto size-8 text-slate-400" />
                             <p class="mt-2 text-sm font-medium text-slate-700">Número no identificado</p>
                             <p class="mt-1 text-xs text-slate-500">+{{ $selected->phone }} no coincide con un cliente registrado. Se identificará si el cliente verifica su identidad con el bot.</p>
@@ -199,7 +199,7 @@
                     @endif
 
                     <p class="mt-6 mb-2 text-[11px] font-semibold tracking-wide text-slate-500 uppercase">Verificación del bot</p>
-                    <div class="rounded-xl bg-white p-3 text-xs shadow-card">
+                    <div class="rounded-xl bg-surface p-3 text-xs shadow-card">
                         @if ($selected->chatbotSession?->isVerified())
                             <p class="flex items-center gap-1.5 text-emerald-700"><x-icon name="shield-check" class="size-4" /> Identidad verificada</p>
                             <p class="mt-1 text-slate-500">Expira {{ $selected->chatbotSession->verification_expires_at->diffForHumans() }}</p>

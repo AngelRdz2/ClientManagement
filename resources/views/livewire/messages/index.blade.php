@@ -3,7 +3,7 @@
 
     <div class="mb-6 grid grid-cols-2 gap-3 sm:grid-cols-4 xl:grid-cols-7">
         @foreach (\App\Enums\MessageStatus::cases() as $s)
-            <button wire:click="$set('status', '{{ $status === $s->value ? '' : $s->value }}')" @class(['rounded-xl border bg-white p-3 text-left shadow-card transition', 'border-indigo-400 ring-2 ring-indigo-500/20' => $status === $s->value, 'border-slate-200/80 hover:border-slate-300' => $status !== $s->value])>
+            <button wire:click="$set('status', '{{ $status === $s->value ? '' : $s->value }}')" @class(['rounded-xl border bg-surface p-3 text-left shadow-card transition', 'border-indigo-400 ring-2 ring-indigo-500/20' => $status === $s->value, 'border-slate-200/80 hover:border-slate-300' => $status !== $s->value])>
                 <x-badge :color="$s->color()" size="xs">{{ $s->label() }}</x-badge>
                 <p class="mt-1.5 text-xl font-bold text-slate-900 tabular-nums">{{ number_format($stats[$s->value] ?? 0) }}</p>
             </button>

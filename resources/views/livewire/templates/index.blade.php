@@ -5,9 +5,9 @@
 
     <div class="mb-5 flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
         <div class="flex gap-1 overflow-x-auto rounded-xl bg-slate-200/50 p-1 scrollbar-thin">
-            <button wire:click="$set('category', '')" @class(['shrink-0 rounded-lg px-3 py-1.5 text-sm font-medium', 'bg-white text-slate-900 shadow-sm' => $category === '', 'text-slate-500 hover:text-slate-800' => $category !== ''])>Todas <span class="text-xs text-slate-400">{{ $counts->sum() }}</span></button>
+            <button wire:click="$set('category', '')" @class(['shrink-0 rounded-lg px-3 py-1.5 text-sm font-medium', 'bg-surface text-slate-900 shadow-sm' => $category === '', 'text-slate-500 hover:text-slate-800' => $category !== ''])>Todas <span class="text-xs text-slate-400">{{ $counts->sum() }}</span></button>
             @foreach (\App\Enums\TemplateCategory::cases() as $cat)
-                <button wire:click="$set('category', '{{ $cat->value }}')" @class(['shrink-0 rounded-lg px-3 py-1.5 text-sm font-medium', 'bg-white text-slate-900 shadow-sm' => $category === $cat->value, 'text-slate-500 hover:text-slate-800' => $category !== $cat->value])>
+                <button wire:click="$set('category', '{{ $cat->value }}')" @class(['shrink-0 rounded-lg px-3 py-1.5 text-sm font-medium', 'bg-surface text-slate-900 shadow-sm' => $category === $cat->value, 'text-slate-500 hover:text-slate-800' => $category !== $cat->value])>
                     {{ $cat->label() }} <span class="text-xs text-slate-400">{{ $counts[$cat->value] ?? 0 }}</span>
                 </button>
             @endforeach
@@ -17,7 +17,7 @@
 
     <div class="grid grid-cols-1 gap-4 md:grid-cols-2 2xl:grid-cols-3">
         @forelse ($templates as $template)
-            <div wire:key="t-{{ $template->id }}" @class(['flex flex-col rounded-2xl border border-slate-200/80 bg-white shadow-card', 'opacity-60' => ! $template->is_active])>
+            <div wire:key="t-{{ $template->id }}" @class(['flex flex-col rounded-2xl border border-slate-200/80 bg-surface shadow-card', 'opacity-60' => ! $template->is_active])>
                 <div class="flex items-start justify-between gap-3 p-5 pb-3">
                     <div class="min-w-0">
                         <div class="flex flex-wrap items-center gap-1.5">
@@ -48,7 +48,7 @@
                 </div>
             </div>
         @empty
-            <div class="col-span-full rounded-2xl border border-dashed border-slate-300 bg-white"><x-empty-state icon="file-text" title="Sin plantillas" description="Crea una plantilla para usarla en campañas." /></div>
+            <div class="col-span-full rounded-2xl border border-dashed border-slate-300 bg-surface"><x-empty-state icon="file-text" title="Sin plantillas" description="Crea una plantilla para usarla en campañas." /></div>
         @endforelse
     </div>
 
@@ -86,7 +86,7 @@
                             <p class="mb-1.5 font-medium text-slate-600">Variables que se envían al proveedor (deben coincidir con la plantilla aprobada):</p>
                             <div class="flex flex-wrap gap-1.5">
                                 @foreach ($vars as $i => $var)
-                                    <span class="rounded-md bg-white px-2 py-0.5 font-mono text-[11px] text-slate-700 ring-1 ring-slate-200">&#123;&#123;{{ $i + 1 }}&#125;&#125; = {{ $var }}</span>
+                                    <span class="rounded-md bg-surface px-2 py-0.5 font-mono text-[11px] text-slate-700 ring-1 ring-slate-200">&#123;&#123;{{ $i + 1 }}&#125;&#125; = {{ $var }}</span>
                                 @endforeach
                             </div>
                         </div>
@@ -115,7 +115,7 @@
                 <div class="relative mb-3">
                     <x-input icon="search" type="search" wire:model.live.debounce.300ms="previewSearch" placeholder="Elegir cliente de prueba…" />
                     @if ($previewCandidates->isNotEmpty())
-                        <ul class="absolute z-10 mt-1 w-full divide-y divide-slate-100 rounded-xl border border-slate-200 bg-white shadow-elevated">
+                        <ul class="absolute z-10 mt-1 w-full divide-y divide-slate-100 rounded-xl border border-slate-200 bg-surface shadow-elevated">
                             @foreach ($previewCandidates as $c)
                                 <li><button type="button" wire:click="selectPreviewCustomer({{ $c->id }})" class="w-full px-3 py-2 text-left text-sm hover:bg-indigo-50">{{ $c->full_name }} <span class="text-xs text-slate-400">{{ $c->code }}</span></button></li>
                             @endforeach

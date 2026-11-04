@@ -27,7 +27,7 @@
         <div class="mb-4 flex items-start gap-2 rounded-xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-800">
             <x-icon name="triangle-alert" class="mt-0.5 size-4 shrink-0" />
             <div>Hay mensajes en cola esperando desde hace más de 2 minutos. Verifica que el procesador de colas esté activo:
-                <code class="rounded bg-white px-1.5 py-0.5 text-xs">php artisan queue:work --queue=campaigns,whatsapp,default</code></div>
+                <code class="rounded bg-surface px-1.5 py-0.5 text-xs">php artisan queue:work --queue=campaigns,whatsapp,default</code></div>
         </div>
     @endif
     @if ($campaign->status === \App\Enums\CampaignStatus::Scheduled)
@@ -44,7 +44,7 @@
         <x-stat-card label="Omitidos" :value="number_format($campaign->skipped_count)" icon="user-x" color="amber" hint="Reglas de envío / duplicados" />
     </div>
 
-    <div class="mb-6 rounded-2xl border border-slate-200/80 bg-white p-5 shadow-card">
+    <div class="mb-6 rounded-2xl border border-slate-200/80 bg-surface p-5 shadow-card">
         <div class="mb-2 flex items-center justify-between text-sm">
             <span class="font-medium text-slate-700">Progreso</span>
             <span class="font-semibold text-slate-900">{{ $campaign->progressPercent() }}%</span>

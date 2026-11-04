@@ -2,7 +2,7 @@
     <x-page-header title="Reportes" description="Indicadores de cartera, cobranza, mensajería y atención. Filtra por fechas y exporta a Excel." />
 
     <div class="grid grid-cols-1 gap-6 xl:grid-cols-[280px_1fr]">
-        <nav class="space-y-1 rounded-2xl border border-slate-200/80 bg-white p-2 shadow-card xl:self-start">
+        <nav class="space-y-1 rounded-2xl border border-slate-200/80 bg-surface p-2 shadow-card xl:self-start">
             @foreach ($reports as $key => [$label, $icon])
                 <button wire:click="$set('report', '{{ $key }}')" @class([
                     'flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm font-medium transition',
@@ -15,7 +15,7 @@
         </nav>
 
         <div class="min-w-0 space-y-4">
-            <div class="flex flex-col gap-3 rounded-2xl border border-slate-200/80 bg-white p-4 shadow-card lg:flex-row lg:items-end lg:justify-between">
+            <div class="flex flex-col gap-3 rounded-2xl border border-slate-200/80 bg-surface p-4 shadow-card lg:flex-row lg:items-end lg:justify-between">
                 <div>
                     <h2 class="text-lg font-semibold text-slate-900">{{ $data['title'] }}</h2>
                     <div class="mt-2 flex flex-wrap gap-4 text-sm">

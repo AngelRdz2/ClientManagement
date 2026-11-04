@@ -38,7 +38,9 @@
     </div>
 
     {{-- Formulario --}}
-    <div class="flex items-center justify-center px-6 py-12 sm:px-12">
+    <div class="relative flex items-center justify-center px-6 py-12 sm:px-12">
+        <div class="absolute top-4 right-4"><x-theme-toggle /></div>
+
         <div class="w-full max-w-sm">
             <div class="mb-8 flex items-center gap-3 lg:hidden">
                 <span class="grid size-10 place-items-center rounded-xl bg-indigo-600"><x-icon name="hand-coins" class="size-5 text-white" /></span>
@@ -84,16 +86,13 @@
                 </button>
             </form>
 
-            @if (app()->isLocal())
-                <div class="mt-8 rounded-xl border border-dashed border-slate-300 bg-slate-50 p-4 text-xs text-slate-600">
-                    <p class="font-semibold text-slate-700">Usuarios de demostración (entorno local)</p>
-                    <ul class="mt-2 space-y-1 font-mono">
-                        <li>admin@crm.test · supervisor@crm.test</li>
-                        <li>asesor@crm.test · cobranza@crm.test</li>
-                        <li class="text-slate-500">Contraseña: <span class="font-semibold">password</span></li>
-                    </ul>
-                </div>
-            @endif
+            <div class="mt-8 flex items-start gap-2.5 rounded-xl border border-slate-200 bg-slate-50 p-4 text-xs text-slate-600">
+                <x-icon name="info" class="mt-0.5 size-4 shrink-0 text-slate-400" />
+                <p>
+                    <span class="font-semibold text-slate-700">¿No tienes cuenta?</span>
+                    El registro no está disponible. Para obtener acceso, contacta con el creador del sistema.
+                </p>
+            </div>
         </div>
     </div>
 </div>

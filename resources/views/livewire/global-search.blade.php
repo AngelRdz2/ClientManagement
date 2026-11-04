@@ -3,11 +3,11 @@
     <x-icon name="search" class="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-slate-400" />
     <input x-ref="search" type="search" wire:model.live.debounce.300ms="query" x-on:focus="open = true" x-on:input="open = true"
            placeholder="Buscar cliente por nombre, DUI, teléfono o código…"
-           class="w-full rounded-xl border-0 bg-slate-100/80 py-2 pr-14 pl-9 text-sm text-slate-800 placeholder:text-slate-400 transition focus:bg-white focus:ring-2 focus:ring-indigo-500/30 focus:outline-none" />
-    <kbd class="pointer-events-none absolute top-1/2 right-3 hidden -translate-y-1/2 rounded border border-slate-300 bg-white px-1.5 text-[10px] font-semibold text-slate-400 md:block">Ctrl K</kbd>
+           class="w-full rounded-xl border-0 bg-slate-100/80 py-2 pr-14 pl-9 text-sm text-slate-800 placeholder:text-slate-400 transition focus:bg-surface focus:ring-2 focus:ring-indigo-500/30 focus:outline-none" />
+    <kbd class="pointer-events-none absolute top-1/2 right-3 hidden -translate-y-1/2 rounded border border-slate-300 bg-surface px-1.5 text-[10px] font-semibold text-slate-400 md:block">Ctrl K</kbd>
 
     <div x-show="open && $wire.query.length >= 2" x-cloak x-transition
-         class="absolute top-full right-0 left-0 z-40 mt-2 overflow-hidden rounded-xl border border-slate-200 bg-white shadow-elevated">
+         class="absolute top-full right-0 left-0 z-40 mt-2 overflow-hidden rounded-xl border border-slate-200 bg-surface shadow-elevated">
         <div wire:loading.flex class="items-center gap-2 px-4 py-3 text-xs text-slate-500">
             <x-icon name="loader-circle" class="size-4 animate-spin" /> Buscando…
         </div>

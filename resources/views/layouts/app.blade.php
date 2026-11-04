@@ -6,6 +6,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ isset($title) ? $title.' · ' : '' }}{{ config('app.name') }}</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%234f46e5'/><path d='M9 17l4 4 10-10' stroke='white' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>">
+    @include('partials.theme')
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
 </head>
@@ -29,11 +30,11 @@
      class="min-h-screen">
 
     {{-- Fondo del menú móvil --}}
-    <div x-show="mobileOpen" x-cloak x-transition.opacity x-on:click="mobileOpen = false" class="fixed inset-0 z-40 bg-slate-900/60 lg:hidden"></div>
+    <div x-show="mobileOpen" x-cloak x-transition.opacity x-on:click="mobileOpen = false" class="fixed inset-0 z-40 bg-slate-900/60 lg:hidden dark:bg-black/70"></div>
 
     {{-- Sidebar --}}
     <aside :class="[collapsed ? 'lg:w-[76px]' : 'lg:w-[264px]', mobileOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0']"
-           class="fixed inset-y-0 left-0 z-50 flex w-[264px] flex-col bg-navy-950 text-navy-100 transition-all duration-300 ease-in-out">
+           class="fixed inset-y-0 left-0 z-50 flex w-[264px] flex-col bg-navy-950 text-navy-100 transition-all duration-300 ease-in-out dark:border-r dark:border-white/5">
         {{-- Marca --}}
         <div class="flex h-16 shrink-0 items-center gap-3 border-b border-white/5 px-5">
             <span class="grid size-9 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-indigo-500 to-indigo-700 shadow-lg shadow-indigo-900/40">
@@ -110,7 +111,7 @@
 
     {{-- Contenido --}}
     <div :class="collapsed ? 'lg:pl-[76px]' : 'lg:pl-[264px]'" class="flex min-h-screen flex-col transition-all duration-300 ease-in-out">
-        <header class="sticky top-0 z-30 flex h-16 shrink-0 items-center gap-3 border-b border-slate-200/80 bg-white/85 px-4 backdrop-blur-md sm:px-6">
+        <header class="sticky top-0 z-30 flex h-16 shrink-0 items-center gap-3 border-b border-slate-200/80 bg-surface/85 px-4 backdrop-blur-md sm:px-6">
             <button x-on:click="mobileOpen = true" class="rounded-lg p-2 text-slate-500 hover:bg-slate-100 lg:hidden">
                 <x-icon name="menu" class="size-5" />
             </button>
@@ -128,6 +129,8 @@
                         <x-icon name="flask-conical" class="size-3.5" /> WhatsApp simulado
                     </span>
                 @endif
+
+                <x-theme-toggle />
 
                 <livewire:notification-bell />
 

@@ -1,6 +1,6 @@
 @props(['title' => null, 'description' => null, 'icon' => null, 'padding' => true])
 
-<div {{ $attributes->class(['rounded-2xl border border-slate-200/80 bg-white shadow-card']) }}>
+<div {{ $attributes->class(['rounded-2xl border border-slate-200/80 bg-surface shadow-card']) }}>
     @if ($title || isset($actions))
         <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 px-5 py-4">
             <div class="flex min-w-0 items-center gap-3">

@@ -77,7 +77,7 @@
                         <div class="relative">
                             <x-input icon="search" type="search" wire:model.live.debounce.300ms="customerSearch" placeholder="Buscar y agregar clientes específicos…" />
                             @if ($customerCandidates->isNotEmpty())
-                                <ul class="absolute z-10 mt-1 w-full divide-y divide-slate-100 rounded-xl border border-slate-200 bg-white shadow-elevated">
+                                <ul class="absolute z-10 mt-1 w-full divide-y divide-slate-100 rounded-xl border border-slate-200 bg-surface shadow-elevated">
                                     @foreach ($customerCandidates as $c)
                                         <li><button type="button" wire:click="addCustomer({{ $c->id }})" class="w-full px-3 py-2 text-left text-sm hover:bg-indigo-50">{{ $c->full_name }} <span class="text-xs text-slate-400">{{ $c->code }}</span></button></li>
                                     @endforeach

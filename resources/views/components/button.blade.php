@@ -3,8 +3,8 @@
 @php
     $variants = [
         'primary' => 'bg-indigo-600 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline-indigo-600',
-        'dark' => 'bg-navy-900 text-white shadow-sm hover:bg-navy-800 focus-visible:outline-navy-900',
-        'secondary' => 'bg-white text-slate-700 shadow-xs ring-1 ring-inset ring-slate-300 hover:bg-slate-50',
+        'dark' => 'bg-navy-900 text-white shadow-sm hover:bg-navy-800 focus-visible:outline-navy-900 dark:ring-1 dark:ring-white/10',
+        'secondary' => 'bg-surface text-slate-700 shadow-xs ring-1 ring-inset ring-slate-300 hover:bg-slate-50',
         'danger' => 'bg-rose-600 text-white shadow-sm hover:bg-rose-500 focus-visible:outline-rose-600',
         'success' => 'bg-emerald-600 text-white shadow-sm hover:bg-emerald-500 focus-visible:outline-emerald-600',
         'warning' => 'bg-amber-500 text-white shadow-sm hover:bg-amber-400 focus-visible:outline-amber-500',
