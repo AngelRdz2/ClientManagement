@@ -6,6 +6,7 @@ use App\Enums\ImportStatus;
 use App\Enums\PaymentMethod;
 use App\Enums\StatusChangeSource;
 use App\Jobs\RecalculateDelinquencyJob;
+use App\Livewire\Customers\Board;
 use App\Livewire\Customers\Form;
 use App\Livewire\Customers\Import;
 use App\Livewire\Customers\Index;
@@ -175,6 +176,71 @@ class Phase2CustomersTest extends TestCase
 
         $this->expectException(LogicException::class);
         $history->update(['reason' => 'alterado']);
+    }
+
+    public function test_customer_board_groups_customers_by_status(): void
+    {
+        $customer = Customer::where('dui', '01234567-8')->firstOrFail();
+
+        $this->actingAs($this->admin())->get(route('customers.board'))
+            ->assertOk()
+            ->assertSee($customer->delinquencyStatus->name)
+            ->assertSee($customer->full_name)
+            ->assertSee('wire:sort="moveCustomer"', false);
+
+        Livewire::actingAs($this->admin())->test(Board::class)
+            ->set('search', $customer->dui)
+            ->assertSee($customer->full_name)
+            ->set('search', 'cliente-que-no-existe')
+            ->assertDontSee($customer->full_name);
+    }
+
+    public function test_board_drag_changes_status_with_reason(): void
+    {
+        $customer = Customer::where('dui', '01234567-8')->firstOrFail();
+        $target = $this->statusByCode('MORA_30');
+        $before = $customer->statusHistories()->count();
+
+        // Soltar en la misma columna no hace nada
+        Livewire::actingAs($this->admin())->test(Board::class)
+            ->call('moveCustomer', $customer->id, 0, (string) $customer->delinquency_status_id)
+            ->assertSet('showMoveModal', false);
+
+        Livewire::actingAs($this->admin())->test(Board::class)
+            ->call('moveCustomer', $customer->id, 0, (string) $target->id)
+            ->assertSet('showMoveModal', true)
+            ->assertSet('moveFromStatusId', $customer->delinquency_status_id)
+            ->assertSet('moveDays', max($customer->days_overdue, $target->min_days_overdue))
+            ->call('saveMove')
+            ->assertHasErrors('moveReason')
+            ->set('moveReason', 'Acuerdo de pago incumplido')
+            ->call('saveMove')
+            ->assertHasNoErrors()
+            ->assertSet('showMoveModal', false)
+            ->assertDispatched('toast');
+
+        $customer->refresh();
+        $history = $customer->statusHistories()->latest('id')->first();
+        $this->assertSame($target->id, $customer->delinquency_status_id);
+        $this->assertSame($before + 1, $customer->statusHistories()->count());
+        $this->assertSame('Acuerdo de pago incumplido', $history->reason);
+        $this->assertSame(StatusChangeSource::Manual, $history->source);
+    }
+
+    public function test_agent_sees_board_but_cannot_move_cards(): void
+    {
+        $agent = User::where('email', 'asesor@crm.test')->first();
+        $customer = Customer::first();
+
+        $this->actingAs($agent)->get(route('customers.board'))
+            ->assertOk()
+            ->assertDontSee('wire:sort="moveCustomer"', false);
+
+        Livewire::actingAs($agent)->test(Board::class)
+            ->call('moveCustomer', $customer->id, 0, (string) $this->statusByCode('MORA_30')->id)
+            ->assertSet('showMoveModal', false)
+            ->call('saveMove')
+            ->assertForbidden();
     }
 
     public function test_automatic_recalculation_respects_manual_statuses(): void

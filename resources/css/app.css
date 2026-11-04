@@ -179,23 +179,33 @@
 .dark .bg-navy-50 { background-color: color-mix(in oklab, var(--color-navy-400) 22%, transparent); }
 .dark .text-navy-700 { color: var(--color-navy-200); }
 
-/* SweetAlert2: integrar con la tipografía y colores del sistema */
+/*
+ * SweetAlert2 (alertas y toasts): sus variables se redefinen en el contenedor para que tomen los colores del tema.
+ * (Se declaran aquí y no en :root porque su hoja de estilos se carga después y las sobrescribiría).
+ */
+.swal2-container {
+    --swal2-background: var(--color-surface);
+    --swal2-color: var(--color-slate-700);
+    --swal2-border-radius: 1rem;
+    --swal2-toast-border: 1px solid var(--color-slate-200);
+    --swal2-close-button-color: var(--color-slate-400);
+    --swal2-input-border: 1px solid var(--color-slate-300);
+    --swal2-validation-message-background: var(--color-slate-100);
+    --swal2-validation-message-color: var(--color-slate-600);
+    --swal2-footer-border-color: var(--color-slate-200);
+    --swal2-timer-progress-bar-background: color-mix(in oklab, var(--color-indigo-500) 55%, transparent);
+}
+
 .swal2-popup {
     font-family: var(--font-sans);
-    border-radius: 1rem !important;
-
-    @variant dark {
-        background: var(--color-surface);
-        color: var(--color-slate-700);
-    }
 }
 
-.dark .swal2-title {
-    color: var(--color-slate-900);
+.swal2-title {
+    color: var(--color-slate-900) !important;
 }
 
-.dark .swal2-html-container {
-    color: var(--color-slate-600);
+.swal2-html-container {
+    color: var(--color-slate-600) !important;
 }
 
 .swal2-styled.swal2-confirm {

@@ -17,6 +17,7 @@ final class Navigation
             ['label' => 'Principal', 'items' => [
                 ['label' => 'Dashboard', 'route' => 'dashboard', 'active' => 'dashboard', 'icon' => 'layout-dashboard'],
                 ['label' => 'Clientes', 'route' => 'customers.index', 'active' => ['customers.index', 'customers.show', 'customers.create', 'customers.edit'], 'icon' => 'users', 'can' => Permissions::CUSTOMERS_VIEW],
+                ['label' => 'Tablero de clientes', 'route' => 'customers.board', 'active' => 'customers.board', 'icon' => 'square-kanban', 'can' => Permissions::CUSTOMERS_VIEW],
                 ['label' => 'Conversaciones', 'route' => 'conversations.index', 'active' => 'conversations.*', 'icon' => 'messages-square', 'can' => Permissions::CONVERSATIONS_ATTEND, 'badge' => 'pending_agent'],
             ]],
             ['label' => 'Cobranza', 'items' => [

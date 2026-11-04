@@ -1,6 +1,14 @@
 <div>
     <x-page-header title="Clientes" description="Consulta, registra y administra la cartera de clientes.">
         <x-slot:actions>
+            <div class="flex rounded-xl bg-slate-100 p-1 text-sm">
+                <span class="flex items-center gap-1.5 rounded-lg bg-surface px-3 py-1.5 font-medium text-slate-900 shadow-sm">
+                    <x-icon name="list" class="size-4" /> Lista
+                </span>
+                <a href="{{ route('customers.board') }}" wire:navigate class="flex items-center gap-1.5 rounded-lg px-3 py-1.5 font-medium text-slate-500 hover:text-slate-800">
+                    <x-icon name="square-kanban" class="size-4" /> Tablero
+                </a>
+            </div>
             @can('customers.import')
                 <x-button variant="secondary" icon="file-spreadsheet" :href="route('customers.import')">Importar Excel</x-button>
             @endcan

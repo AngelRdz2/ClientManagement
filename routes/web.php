@@ -42,6 +42,7 @@ Route::middleware(['auth', 'active'])->group(function () {
     });
     Route::middleware('permission:customers.view')->group(function () {
         Route::livewire('/clientes', Livewire\Customers\Index::class)->name('customers.index');
+        Route::livewire('/clientes/tablero', Livewire\Customers\Board::class)->name('customers.board');
         Route::livewire('/clientes/{customer}', Livewire\Customers\Show::class)->name('customers.show')->whereNumber('customer');
     });
     Route::livewire('/cobranza/estados', Livewire\Delinquency\Statuses::class)->middleware('permission:delinquency.manage')->name('delinquency.index');
